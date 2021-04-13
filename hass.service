@@ -1,0 +1,17 @@
+[Unit]
+Description = Home Assistant server
+Wants = network-online.target
+After = network.target network-online.target
+
+[Service]
+Type = simple
+User = %i           
+WorkingDirectory = /home/%i/.homeassistant
+ExecStart = /srv/homeassistant/bin/hass -c "/home/%i/.homeassistant"
+RemainAfterExit = no
+Restart = on-failure
+RestartSec = 5s
+
+[Install]
+WantedBy = default.target
+
